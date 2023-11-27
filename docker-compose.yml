@@ -1,0 +1,79 @@
+version: "3"
+
+services:
+  # BOOKING API SERVICES
+  booking-api:
+    image: vitorgois/booking-api:latest
+    mem_limit: 400m
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=webapp-hotel
+      - PORT=8080
+    ports:
+      - 8080:8080
+    networks:
+      - postgres-booking
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres-booking
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    volumes:
+      - /data/postgres-booking:/data/postgres-booking
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=webapp-hotel
+    networks:
+      - postgres-booking
+
+  # AEROZEN API SERVICES
+  aerozen-api:
+    image: vitorgois/aero-api:latest
+    mem_limit: 400m
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGO_URL=mongodb://aerozen:123456@mongo:27017
+      - JWT_SECRET=aerozen
+      - JWT_EXPIRES=1y
+      - SWAGGER_TITLE=AeroZen
+      - SWAGGER_vERSION=1.0.0
+    ports:
+      - 8081:3000
+    networks:
+      - mongo-aerozen
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'aerozen'
+      MONGO_INITDB_ROOT_PASSWORD: '123456'
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/mongo-aerozen:/data/mongo-aerozen
+    networks:
+      - mongo-aerozen
+
+  # EVENT API SERVICES
+  event-api:
+    image: vitorgois/event-api:latest
+    mem_limit: 400m
+    ports:
+      - 8082:8080
+ 
+networks:
+  postgres-booking:
+    driver: bridge
+  mongo-aerozen:
+    driver: bridge
