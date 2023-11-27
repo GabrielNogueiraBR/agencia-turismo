@@ -36,7 +36,7 @@ Descrição curta do seu projeto.
 5. Construa e inicie os contêineres Docker:
 
    ```bash
-   docker-compose up -d --build
+   docker-compose up -d
    ```
 
    Isso criará os contêineres especificados no arquivo `docker-compose.yml`.
