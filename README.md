@@ -13,7 +13,7 @@ Descrição curta do seu projeto.
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-projeto.git
+   git clone https://github.com/GabrielNogueiraBR/agencia-turismo.git
    cd seu-projeto
    ```
 
