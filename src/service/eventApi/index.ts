@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios'
 
 const eventApi = axios.create({
-  baseURL: "https://localhost:8082",
-});
+  baseURL: 'https://localhost:8082',
+})
 
-export default eventApi;
+export default eventApi

@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { Flex, Heading, Spacer } from "@chakra-ui/react";
-import React from "react";
-import UserInfo from "./UserInfo";
+import { Flex, Heading, Spacer } from '@chakra-ui/react'
+import React from 'react'
+import UserInfo from './UserInfo'
 
 const Header = () => {
   return (
@@ -12,7 +12,7 @@ const Header = () => {
       <Spacer />
       <UserInfo />
     </Flex>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -1,8 +1,8 @@
-import React from "react";
-import ClientElement from "./ClientElement";
+import React from 'react'
+import ClientElement from './ClientElement'
 
 const Page = () => {
-  return <ClientElement />;
-};
+  return <ClientElement />
+}
 
-export default Page;
+export default Page

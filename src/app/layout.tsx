@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
-import { Providers } from "./providers";
-import LayoutClientElement from "./LayoutClientElement";
+import type { Metadata } from 'next'
+import { Providers } from './providers'
+import LayoutClientElement from './LayoutClientElement'
 
 export const metadata: Metadata = {
-  title: "Home",
-};
+  title: 'Home',
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
       <body>
@@ -19,5 +15,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+  )
 }

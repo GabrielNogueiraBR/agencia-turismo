@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
 const ClientElement = () => {
-  return <div>ClientElement</div>;
-};
+  return <div>ClientElement</div>
+}
 
-export default ClientElement;
+export default ClientElement

@@ -1,10 +1,10 @@
-import React from "react";
-import LayoutClientElement from "./LayoutClientElement";
+import React from 'react'
+import LayoutClientElement from './LayoutClientElement'
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function RootLayout({ children }: Props) {
-  return <LayoutClientElement>{children}</LayoutClientElement>;
+  return <LayoutClientElement>{children}</LayoutClientElement>
 }

@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import React from "react";
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import React from 'react'
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react'
 
 const ClientElement = () => {
   return (
@@ -25,7 +25,7 @@ const ClientElement = () => {
         </TabPanel>
       </TabPanels>
     </Tabs>
-  );
-};
+  )
+}
 
-export default ClientElement;
+export default ClientElement

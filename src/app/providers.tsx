@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { CacheProvider } from "@chakra-ui/next-js";
-import { ChakraProvider } from "@chakra-ui/react";
-import { Inter } from "next/font/google";
-import { theme } from "@/styles/theme";
-import { AuthProvider } from "@/context/AuthContext";
+import { CacheProvider } from '@chakra-ui/next-js'
+import { ChakraProvider } from '@chakra-ui/react'
+import { Inter } from 'next/font/google'
+import { theme } from '@/styles/theme'
+import { AuthProvider } from '@/context/AuthContext'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -24,5 +24,5 @@ export function Providers({ children }: { children: React.ReactNode }) {
         </ChakraProvider>
       </CacheProvider>
     </>
-  );
+  )
 }

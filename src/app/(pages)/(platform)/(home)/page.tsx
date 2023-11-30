@@ -1,5 +1,5 @@
-import ClientElement from "./ClientElement";
+import ClientElement from './ClientElement'
 
 export default function Home() {
-  return <ClientElement />;
+  return <ClientElement />
 }
