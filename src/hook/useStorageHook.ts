@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useEffect, useState } from 'react'
 
 function useStorageHook<T>(key: string, storageType: 'local' | 'session' = 'local') {
