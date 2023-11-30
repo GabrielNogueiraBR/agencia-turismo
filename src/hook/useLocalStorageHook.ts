@@ -17,12 +17,16 @@ function useLocalStorageHook<T>(key: string) {
     [key],
   )
 
+  const removeLocalStorageValue = useCallback(() => {
+    localStorage.removeItem(key)
+  }, [key])
+
   useEffect(() => {
     loadLocalStorageValue()
     setIsLoading(false)
   }, [loadLocalStorageValue])
 
-  return { value, isLoading, loadLocalStorageValue, setLocalStorageValue }
+  return { value, isLoading, loadLocalStorageValue, setLocalStorageValue, removeLocalStorageValue }
 }
 
 export default useLocalStorageHook
