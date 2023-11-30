@@ -12,6 +12,7 @@ const LayoutClientElement = ({ children }: { children: React.ReactNode }) => {
       direction="column"
       justify="flex-start"
       align="center"
+      gap="12"
     >
       <Header />
       {children}
