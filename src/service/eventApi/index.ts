@@ -1,7 +1,8 @@
+import { EVENT_API_URL } from '@/constant/config'
 import axios from 'axios'
 
 const eventApi = axios.create({
-  baseURL: 'https://localhost:8082',
+  baseURL: EVENT_API_URL,
 })
 
 export default eventApi
