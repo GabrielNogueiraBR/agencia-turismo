@@ -1,25 +1,27 @@
 import { useCallback, useEffect, useState } from 'react'
 
-function useLocalStorageHook<T>(key: string) {
+function useStorageHook<T>(key: string, storageType: 'local' | 'session' = 'local') {
   const [value, setValue] = useState<string>()
   const [isLoading, setIsLoading] = useState(true)
 
+  const storage = storageType === 'local' ? localStorage : sessionStorage
+
   const loadLocalStorageValue = useCallback(() => {
-    const localValue = localStorage.getItem(key)
+    const localValue = storage.getItem(key)
     if (localValue) setValue(localValue)
-  }, [key])
+  }, [key, storage])
 
   const setLocalStorageValue = useCallback(
     (value: string) => {
-      localStorage.setItem(key, value)
+      storage.setItem(key, value)
       setValue(value)
     },
-    [key],
+    [key, storage],
   )
 
   const removeLocalStorageValue = useCallback(() => {
-    localStorage.removeItem(key)
-  }, [key])
+    storage.removeItem(key)
+  }, [key, storage])
 
   useEffect(() => {
     loadLocalStorageValue()
@@ -29,4 +31,4 @@ function useLocalStorageHook<T>(key: string) {
   return { value, isLoading, loadLocalStorageValue, setLocalStorageValue, removeLocalStorageValue }
 }
 
-export default useLocalStorageHook
+export default useStorageHook

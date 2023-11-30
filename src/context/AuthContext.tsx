@@ -1,4 +1,4 @@
-import useLocalStorageHook from '@/hook/useLocalStorageHook'
+import useStorageHook from '@/hook/useStorageHook'
 import flightApi from '@/service/flightApi'
 import { TokenPresenter, UserPresenter } from '@/types/flightApi'
 import { redirect, usePathname } from 'next/navigation'
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     value: tokenAeroZen,
     isLoading: isLoadingToken,
     setLocalStorageValue,
-  } = useLocalStorageHook('token-aerozen')
+  } = useStorageHook('token-aerozen', 'session')
 
   const pathname = usePathname()
   if (!token && !isLoading && pathname !== '/auth')
