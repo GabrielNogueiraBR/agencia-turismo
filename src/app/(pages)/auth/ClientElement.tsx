@@ -57,6 +57,7 @@ export default function ClientElement() {
               <Input
                 type="username"
                 {...register('username', { required: true })}
+                autoComplete="off"
                 isDisabled={isSigning}
               />
             </FormControl>
@@ -65,6 +66,7 @@ export default function ClientElement() {
               <Input
                 type="password"
                 {...register('password', { required: true })}
+                autoComplete="off"
                 isDisabled={isSigning}
               />
             </FormControl>

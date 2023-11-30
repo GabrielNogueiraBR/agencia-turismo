@@ -1,10 +1,11 @@
 import flightApi from '@/service/flightApi'
-import { TokenPresenter } from '@/types/flightApi'
+import { TokenPresenter, UserPresenter } from '@/types/flightApi'
 import { redirect, usePathname } from 'next/navigation'
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 interface AuthContextData {
   token?: string
+  userInfo?: UserPresenter
   isLoading: boolean
   isSigning: boolean
   signIn: (username: string, password: string) => Promise<void>
@@ -18,6 +19,8 @@ interface ProviderProps {
 
 export const AuthProvider = ({ children }: ProviderProps) => {
   const [token, setToken] = useState<string>()
+  const [userInfo, setUserInfo] = useState<UserPresenter>()
+
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isSigning, setIsSigning] = useState<boolean>(false)
 
@@ -40,16 +43,35 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   }, [])
 
-  const contextData: AuthContextData = useMemo(
-    () => ({ token, isLoading, isSigning, signIn }),
-    [token, isLoading, isSigning, signIn],
-  )
+  const loadUserInfo = useCallback(async () => {
+    if (!token) return
+    try {
+      setIsLoading(true)
+
+      // Update Header
+      const config = { headers: { Authorization: `Bearer ${token}` } }
+      const response = await flightApi.get<UserPresenter>('/users/me', config)
+      setUserInfo(response.data)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [token])
+
+  useEffect(() => {
+    if (token) loadUserInfo()
+  }, [token, loadUserInfo])
 
   useEffect(() => {
     setIsLoading(false)
   }, [])
 
-  return <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export const useAuth = () => useContext(AuthContext)
