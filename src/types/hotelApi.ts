@@ -46,3 +46,18 @@ export type Hotel = {
     zipcode: string
   }
 }
+
+export type RoomCreateDto = {
+  singleBed: number
+  doubleBed: number
+  number: number
+  price: number
+}
+
+export type Room = {
+  id: string
+  singleBed: number
+  doubleBed: number
+  number: number
+  price: number
+}

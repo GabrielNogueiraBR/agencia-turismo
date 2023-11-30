@@ -1,4 +1,11 @@
-import { Hotel, HotelCreateDto, User, UserCreateDto } from '../../types/hotelApi'
+import {
+  Hotel,
+  HotelCreateDto,
+  Room,
+  RoomCreateDto,
+  User,
+  UserCreateDto,
+} from '../../types/hotelApi'
 import { HOTEL_API_URL } from '../../constant/config'
 import axios from 'axios'
 
@@ -36,11 +43,36 @@ const createHotel = async () => {
   return data
 }
 
+const createRoom = async ({
+  hotelId,
+  singleBed = 1,
+  doubleBed = 2,
+  number = 1,
+  price = 124.99,
+}: { hotelId: string } & Partial<RoomCreateDto>) => {
+  const payload: RoomCreateDto = {
+    singleBed,
+    doubleBed,
+    number,
+    price,
+  }
+
+  const response = await axios.post<Room>(`${HOTEL_API_URL}/hotels/${hotelId}/rooms`, payload)
+  const data = response.data
+  return data
+}
+
 const setupHotelApi = async () => {
   const user = await createUser()
   const hotel = await createHotel()
 
+  const room1 = await createRoom({ hotelId: hotel.id, number: 1 })
+  const room2 = await createRoom({ hotelId: hotel.id, number: 2 })
+  const room3 = await createRoom({ hotelId: hotel.id, number: 3 })
+
+  console.log({ user })
   console.log({ hotel })
+  console.log({ room1, room2, room3 })
 }
 
 export { setupHotelApi }
