@@ -8,6 +8,8 @@ import { useAuth } from '@/context/AuthContext'
 const UserInfo = () => {
   const { userInfo } = useAuth()
 
+  console.log({ userInfo })
+
   return (
     <Flex direction="row" justify="center" align="center" gap="4">
       <VStack spacing={0} align="flex-end">

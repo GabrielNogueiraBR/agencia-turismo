@@ -1,3 +1,4 @@
+import useLocalStorageHook from '@/hook/useLocalStorageHook'
 import flightApi from '@/service/flightApi'
 import { TokenPresenter, UserPresenter } from '@/types/flightApi'
 import { redirect, usePathname } from 'next/navigation'
@@ -24,24 +25,34 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isSigning, setIsSigning] = useState<boolean>(false)
 
+  const {
+    value: tokenAeroZen,
+    isLoading: isLoadingToken,
+    setLocalStorageValue,
+  } = useLocalStorageHook('token-aerozen')
+
   const pathname = usePathname()
   if (!token && !isLoading && pathname !== '/auth')
     redirect(`/auth?callbackUrl=${encodeURIComponent(pathname)}`)
 
-  const signIn = useCallback(async (username: string, password: string) => {
-    try {
-      setIsSigning(true)
+  const signIn = useCallback(
+    async (username: string, password: string) => {
+      try {
+        setIsSigning(true)
 
-      const response = await flightApi.post<TokenPresenter>('/auth/login', { username, password })
-      const token = response.data
+        const response = await flightApi.post<TokenPresenter>('/auth/login', { username, password })
+        const token = response.data
 
-      setToken(token.token)
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setIsSigning(false)
-    }
-  }, [])
+        setToken(token.token)
+        setLocalStorageValue(token.token)
+      } catch (e) {
+        console.error(e)
+      } finally {
+        setIsSigning(false)
+      }
+    },
+    [setLocalStorageValue],
+  )
 
   const loadUserInfo = useCallback(async () => {
     if (!token) return
@@ -64,11 +75,15 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   }, [token, loadUserInfo])
 
   useEffect(() => {
-    setIsLoading(false)
-  }, [])
+    if (!token && tokenAeroZen) setToken(tokenAeroZen)
+  }, [tokenAeroZen, token])
+
+  useEffect(() => {
+    if (!isLoadingToken) setIsLoading(false)
+  }, [isLoadingToken])
 
   return (
-    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn }}>
+    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn, userInfo }}>
       {children}
     </AuthContext.Provider>
   )
