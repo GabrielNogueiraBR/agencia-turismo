@@ -40,7 +40,7 @@ export default function ClientElement() {
   const search = searchParams.get('callbackUrl') || '/'
   const callbackUrl = decodeURIComponent(search)
 
-  const { token, isLoading, signIn } = useAuth()
+  const { token, isLoading, signUp } = useAuth()
 
   if (token && !isLoading) redirect(callbackUrl)
 
@@ -52,7 +52,8 @@ export default function ClientElement() {
 
   const onSubmit = async (data: FormLogin) => {
     try {
-      console.log({ data })
+      const birthdate = new Date(data.birthdate).toISOString()
+      await signUp({ ...data, birthdate })
     } catch (e) {
       console.error(e)
     }

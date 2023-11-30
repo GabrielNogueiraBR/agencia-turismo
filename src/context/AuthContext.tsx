@@ -1,6 +1,8 @@
 import useStorageHook from '@/hook/useStorageHook'
 import flightApi from '@/service/flightApi'
-import { TokenPresenter, UserPresenter } from '@/types/flightApi'
+import hotelApi from '@/service/hotelApi'
+import { CreateUserDto, TokenPresenter, UserPresenter } from '@/types/flightApi'
+import { User, UserCreateDto } from '@/types/hotelApi'
 import { redirect, usePathname } from 'next/navigation'
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
@@ -10,6 +12,7 @@ interface AuthContextData {
   isLoading: boolean
   isSigning: boolean
   signIn: (username: string, password: string) => Promise<void>
+  signUp: (params: CreateUserDto & UserCreateDto) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -54,6 +57,31 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     [setLocalStorageValue],
   )
 
+  const signUp = useCallback(
+    async (params: CreateUserDto & UserCreateDto) => {
+      const userHotelPayload: UserCreateDto = {
+        name: params.name,
+        email: params.email,
+        taxId: params.taxId,
+        phone: params.phone,
+        birthdate: params.birthdate,
+      }
+
+      await hotelApi.post<User>('/users', userHotelPayload)
+
+      const userFlightPayload: CreateUserDto = {
+        name: params.name,
+        email: params.email,
+        username: params.username,
+        password: params.password,
+      }
+      await flightApi.post<UserPresenter>('/users', userFlightPayload)
+
+      await signIn(params.username, params.password)
+    },
+    [signIn],
+  )
+
   const loadUserInfo = useCallback(async () => {
     if (!token) return
     try {
@@ -83,7 +111,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   }, [isLoadingToken])
 
   return (
-    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn, userInfo }}>
+    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn, userInfo, signUp }}>
       {children}
     </AuthContext.Provider>
   )
