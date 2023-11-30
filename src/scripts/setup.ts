@@ -2,7 +2,7 @@ import { setupFlightApi } from './flight'
 import { setupHotelApi } from './hotel'
 
 const main = async () => {
-  // await setupHotelApi()
+  await setupHotelApi()
   await setupFlightApi()
 }
 

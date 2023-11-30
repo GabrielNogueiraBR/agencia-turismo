@@ -69,10 +69,6 @@ const setupHotelApi = async () => {
   const room1 = await createRoom({ hotelId: hotel.id, number: 1 })
   const room2 = await createRoom({ hotelId: hotel.id, number: 2 })
   const room3 = await createRoom({ hotelId: hotel.id, number: 3 })
-
-  console.log({ user })
-  console.log({ hotel })
-  console.log({ room1, room2, room3 })
 }
 
 export { setupHotelApi }
