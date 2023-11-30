@@ -24,18 +24,23 @@ import { useForm } from 'react-hook-form'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 interface FormLogin {
+  name: string
+  email: string
   username: string
+  taxId: string
+  phone: string
+  birthdate: string
   password: string
 }
 
 export default function ClientElement() {
   const [showPassword, setShowPassword] = useState(false)
-  
+
   const searchParams = useSearchParams()
   const search = searchParams.get('callbackUrl') || '/'
   const callbackUrl = decodeURIComponent(search)
 
-  const { token, isLoading, signIn, isSigning } = useAuth()
+  const { token, isLoading, signIn } = useAuth()
 
   if (token && !isLoading) redirect(callbackUrl)
 
@@ -47,8 +52,7 @@ export default function ClientElement() {
 
   const onSubmit = async (data: FormLogin) => {
     try {
-      signIn(data.username, data.password)
-      redirect('/')
+      console.log({ data })
     } catch (e) {
       console.error(e)
     }
@@ -56,39 +60,94 @@ export default function ClientElement() {
 
   return (
     <Flex flex="1" align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      <Stack spacing={8} mx={'auto'} maxW={'2xl'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Faça seu cadastro 😎</Heading>
         </Stack>
         <Box rounded={'lg'} bg="white" boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
+            <FormControl isInvalid={!!errors.name} isRequired>
+              <FormLabel>Nome</FormLabel>
+              <Input
+                type="text"
+                {...register('name', { required: true })}
+                isDisabled={isSubmitting}
+              />
+            </FormControl>
+            <HStack>
+              <Box flex="1">
+                <FormControl isInvalid={!!errors.username} isRequired>
+                  <FormLabel>Username</FormLabel>
+                  <Input
+                    type="text"
+                    {...register('username', { required: true })}
+                    isDisabled={isSubmitting}
+                  />
+                </FormControl>
+              </Box>
+              <Box flex="0.8">
+                <FormControl isInvalid={!!errors.birthdate} isRequired>
+                  <FormLabel>Data de Nascimento</FormLabel>
+                  <Input
+                    type="date"
+                    {...register('birthdate', { required: true })}
+                    isDisabled={isSubmitting}
+                  />
+                </FormControl>
+              </Box>
+            </HStack>
             <HStack>
               <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                <FormControl isInvalid={!!errors.phone} isRequired>
+                  <FormLabel>Celular</FormLabel>
+                  <Input
+                    type="text"
+                    {...register('phone', {
+                      required: true,
+                      minLength: { value: 11, message: '11 caracteres' },
+                      maxLength: { value: 11, message: '11 caracteres' },
+                    })}
+                    isDisabled={isSubmitting}
+                  />
                 </FormControl>
               </Box>
               <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                <FormControl isInvalid={!!errors.taxId} isRequired>
+                  <FormLabel>CEP</FormLabel>
+                  <Input
+                    type="text"
+                    {...register('taxId', {
+                      required: true,
+                      minLength: { value: 11, message: '11 caracteres' },
+                      maxLength: { value: 11, message: '11 caracteres' },
+                    })}
+                    isDisabled={isSubmitting}
+                  />
                 </FormControl>
               </Box>
             </HStack>
 
-            <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+            <FormControl isInvalid={!!errors.email} isRequired>
+              <FormLabel>Email</FormLabel>
+              <Input
+                type="email"
+                {...register('email', { required: true })}
+                isDisabled={isSubmitting}
+              />
             </FormControl>
-            <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
+            <FormControl isInvalid={!!errors.password} isRequired>
+              <FormLabel>Senha</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('password', { required: true })}
+                  isDisabled={isSubmitting}
+                />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
-                    onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                    onClick={() => setShowPassword((showPassword) => !showPassword)}
+                  >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   </Button>
                 </InputRightElement>
