@@ -11,7 +11,9 @@ import {
   Stack,
   Button,
   Heading,
+  Link,
 } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { redirect, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
@@ -70,13 +72,12 @@ export default function ClientElement() {
                 isDisabled={isSigning}
               />
             </FormControl>
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                align={'start'}
-                justify={'space-between'}
-              >
+            <Stack spacing={8}>
+              <Stack direction="column" align={'start'} justify={'space-between'} spacing={2}>
                 <Checkbox>Remember me</Checkbox>
+                <Link href="/auth/signup" as={NextLink} alignSelf='center' color="blue.500">
+                  Criar uma conta
+                </Link>
               </Stack>
               <Button
                 bg={'blue.400'}

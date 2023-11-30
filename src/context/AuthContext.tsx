@@ -32,8 +32,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   } = useStorageHook('token-aerozen', 'session')
 
   const pathname = usePathname()
-  if (!token && !isLoading && pathname !== '/auth')
-    redirect(`/auth?callbackUrl=${encodeURIComponent(pathname)}`)
+  if (!token && !isLoading && !['/auth/login', '/auth/signup'].includes(pathname))
+    redirect(`/auth/login?callbackUrl=${encodeURIComponent(pathname)}`)
 
   const signIn = useCallback(
     async (username: string, password: string) => {
