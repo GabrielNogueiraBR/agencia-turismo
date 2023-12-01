@@ -122,7 +122,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   }, [isLoadingToken])
 
   return (
-    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn, userInfo, signUp }}>
+    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn, userInfo, userHotel, signUp }}>
       {children}
     </AuthContext.Provider>
   )

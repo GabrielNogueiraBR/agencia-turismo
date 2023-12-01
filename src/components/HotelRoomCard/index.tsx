@@ -2,36 +2,31 @@
 
 import React, { useMemo } from 'react'
 
-import { Hotel, Room } from '@/types/hotelApi'
+import { BookingCreateDto, BookingDto, Hotel, Room } from '@/types/hotelApi'
 import {
-  Divider,
   Flex,
   FlexProps,
-  HStack,
-  Heading,
   Image,
   VStack,
   Text,
   Badge,
   Spacer,
-  Icon,
-  Center,
   FormControl,
   FormLabel,
   Input,
   Button,
+  useToast,
 } from '@chakra-ui/react'
-import { useQuery } from '@tanstack/react-query'
 import hotelApi from '@/service/hotelApi'
 
-import { MdOutlineKingBed, MdOutlineLocationOn, MdPhone, MdSingleBed } from 'react-icons/md'
 import RoomInfo from './RoomInfo'
 import RoomHeader from './RoomHeader'
 import { useForm } from 'react-hook-form'
+import { useAuth } from '@/context/AuthContext'
 
 interface FormValues {
-  checkIn: Date
-  checkOut: Date
+  checkIn: string
+  checkOut: string
 }
 
 interface Props extends FlexProps {
@@ -40,6 +35,10 @@ interface Props extends FlexProps {
 }
 
 const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
+  const { userHotel } = useAuth()
+
+  const toast = useToast()
+
   const reservationDays = 1
 
   const {
@@ -58,9 +57,35 @@ const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      console.log(data)
+      if (!userHotel) return
+
+      const payload: BookingCreateDto = {
+        guests: 1,
+        checkInDate: new Date(data.checkIn).toISOString(),
+        checkoutDate: new Date(data.checkOut).toISOString(),
+        hotel: hotel.id,
+        room: room.id,
+        user: userHotel.id,
+        status: 'PENDING',
+      }
+      const response = await hotelApi.post<BookingDto>('/bookings', payload)
+
+      toast({
+        title: 'Reserva criada!',
+        description: 'Sua reserva foi criada com sucesso.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
     } catch (e) {
       console.error(e)
+      toast({
+        title: 'Erro na criação da reserva',
+        description: e instanceof Error ? e.message : 'Ops, tente novamente.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
     }
   }
 
