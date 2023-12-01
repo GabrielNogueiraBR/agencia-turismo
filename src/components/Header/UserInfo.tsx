@@ -18,7 +18,7 @@ const UserInfo = () => {
           meus pedidos
         </Link>
       </VStack>
-      <Avatar size="lg" name={userInfo?.name} />
+      <Avatar size="lg" bg="blue.400" name={userInfo?.name} />
     </Flex>
   )
 }
