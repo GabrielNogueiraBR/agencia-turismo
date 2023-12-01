@@ -15,7 +15,7 @@ const FlightPanel = ({ ...rest }: Props) => {
     data: flights,
   } = useQuery<FlightPresenter[]>({
     queryKey: ['flightsList'],
-    queryFn: () => flightApi.get('/flights').then((res) => res.data.records),
+    queryFn: () => flightApi.get('/flights').then((res) => res.data.data),
   })
 
   return (

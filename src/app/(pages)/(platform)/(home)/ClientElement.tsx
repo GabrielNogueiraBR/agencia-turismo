@@ -4,6 +4,7 @@ import React from 'react'
 import { Tabs, TabList, Tab, TabPanels, Flex } from '@chakra-ui/react'
 import HotelPanel from './components/HotelPanel'
 import FlightPanel from './components/FlightPanel'
+import EventPanel from './components/EventPanel'
 
 const ClientElement = () => {
   return (
@@ -42,6 +43,7 @@ const ClientElement = () => {
         >
           <HotelPanel />
           <FlightPanel />
+          <EventPanel />
         </TabPanels>
       </Tabs>
     </Flex>
