@@ -22,7 +22,9 @@ const RoomInfo = ({ hotel, room, ...rest }: Props) => {
           </HStack>
           <HStack>
             <Icon as={MdOutlineLocationOn} fontSize="2xl" color="gray.500" />
-            <Text fontSize="lg">{hotel.address.street}</Text>
+            <Text fontSize="lg" maxW="250" isTruncated>
+              {hotel.address.street}
+            </Text>
           </HStack>
         </VStack>
         <VStack align="flex-start">
