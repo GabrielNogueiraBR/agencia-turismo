@@ -27,6 +27,12 @@ import hotelApi from '@/service/hotelApi'
 import { MdOutlineKingBed, MdOutlineLocationOn, MdPhone, MdSingleBed } from 'react-icons/md'
 import RoomInfo from './RoomInfo'
 import RoomHeader from './RoomHeader'
+import { useForm } from 'react-hook-form'
+
+interface FormValues {
+  checkIn: Date
+  checkOut: Date
+}
 
 interface Props extends FlexProps {
   hotel: Hotel
@@ -36,6 +42,12 @@ interface Props extends FlexProps {
 const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
   const reservationDays = 1
 
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+  } = useForm<FormValues>()
+
   const priceFormatted = useMemo(
     () =>
       new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
@@ -43,6 +55,14 @@ const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
       ),
     [reservationDays, room],
   )
+
+  const onSubmit = async (data: FormValues) => {
+    try {
+      console.log(data)
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <Flex w="100%" shadow="md" border="1px solid" borderColor="gray.200" gap="4" {...rest}>
@@ -63,21 +83,28 @@ const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
           <RoomInfo hotel={hotel} room={room} />
         </VStack>
         <Spacer />
-        <VStack w='24rem' align="center" justify="center" spacing="2">
-          <FormControl>
+        <VStack w="24rem" align="center" justify="center" spacing="2">
+          <FormControl isDisabled={isSubmitting} isInvalid={!!errors.checkIn}>
             <FormLabel>Check-in</FormLabel>
-            <Input type="date" />
+            <Input type="date" {...register('checkIn', { required: true })} />
           </FormControl>
-          <FormControl>
+          <FormControl isDisabled={isSubmitting} isInvalid={!!errors.checkOut}>
             <FormLabel>Check-out</FormLabel>
-            <Input type="date" />
+            <Input type="date" {...register('checkOut', { required: true })} />
           </FormControl>
         </VStack>
         <VStack align="center" justify="center" px="8">
           <Text fontSize="4xl" fontWeight={600} color="gray.700">
             {priceFormatted}
           </Text>
-          <Button w="100%" px="12" size="lg" fontSize="xl" colorScheme="green">
+          <Button
+            w="100%"
+            px="12"
+            size="lg"
+            fontSize="xl"
+            colorScheme="green"
+            onClick={handleSubmit(onSubmit)}
+          >
             Comprar
           </Button>
         </VStack>
