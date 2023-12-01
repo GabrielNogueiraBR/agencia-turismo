@@ -73,3 +73,9 @@ export type FlightPresenter = {
     },
   ]
 }
+
+export type SeatPresenter = {
+  seatNumber: string
+  seatClass: string
+  price: number
+}

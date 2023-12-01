@@ -1,5 +1,6 @@
 'use client'
 
+import FlightSeats from '@/components/FlightSeats'
 import flightApi from '@/service/flightApi'
 import { FlightPresenter } from '@/types/flightApi'
 import { TabPanel, TabPanelProps } from '@chakra-ui/react'
@@ -20,7 +21,7 @@ const FlightPanel = ({ ...rest }: Props) => {
 
   return (
     <TabPanel display="flex" flexDirection="column" pt="8" p="6" gap="4" w="100%" {...rest}>
-      {flights?.map((flight) => flight.airline)}
+      {flights?.map((flight) => <FlightSeats key={flight.id} flight={flight} />)}
     </TabPanel>
   )
 }
