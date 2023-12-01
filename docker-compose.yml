@@ -24,8 +24,8 @@ services:
     image: postgres:15
     ports:
       - '5432:5432'
-    volumes:
-      - /data/postgres-booking:/data/postgres-booking
+    # volumes:
+    #   - /data/postgres-booking:/data/postgres-booking
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
@@ -60,8 +60,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: '123456'
     ports:
       - 27017:27017
-    volumes:
-      - /data/mongo-aerozen:/data/mongo-aerozen
+    # volumes:
+    #   - /data/mongo-aerozen:/data/mongo-aerozen
     networks:
       - mongo-aerozen
 
