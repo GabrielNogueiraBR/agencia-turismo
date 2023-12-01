@@ -13,7 +13,7 @@ const createUser = async () => {
   const payload: UserCreateDto = {
     name: 'Fulano de Tal',
     email: 'fulanodetal@gmail.com.br',
-    taxId: '11252010313',
+    taxId: '11232010313',
     phone: '82986799665',
     birthdate: '1951-10-17T14:48:00.000Z',
   }

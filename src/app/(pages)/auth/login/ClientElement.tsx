@@ -75,7 +75,7 @@ export default function ClientElement() {
             <Stack spacing={8}>
               <Stack direction="column" align={'start'} justify={'space-between'} spacing={2}>
                 <Checkbox>Remember me</Checkbox>
-                <Link href="/auth/signup" as={NextLink} alignSelf='center' color="blue.500">
+                <Link href="/auth/signup" as={NextLink} alignSelf="center" color="blue.500">
                   Criar uma conta
                 </Link>
               </Stack>
