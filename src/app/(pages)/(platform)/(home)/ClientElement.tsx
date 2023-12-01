@@ -31,7 +31,7 @@ const ClientElement = () => {
         >
           <Tab>Reserva de Hotel</Tab>
           <Tab>Vôos</Tab>
-          <Tab>Ingressos</Tab>
+          <Tab>Eventos</Tab>
         </TabList>
         <TabPanels
           w="100%"
