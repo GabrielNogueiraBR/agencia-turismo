@@ -69,7 +69,7 @@ const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
             <Input type="date" />
           </FormControl>
           <FormControl>
-            <FormLabel>Check-ou</FormLabel>
+            <FormLabel>Check-out</FormLabel>
             <Input type="date" />
           </FormControl>
         </VStack>
