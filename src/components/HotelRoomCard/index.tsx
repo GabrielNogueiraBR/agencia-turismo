@@ -56,7 +56,7 @@ const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
       <Flex flex="1" direction="row" p="4" gap="4">
         <VStack align="flex-start">
           <RoomHeader hotel={hotel} room={room} />
-          <Badge fontSize="md" rounded="full" px="4" bg="blue.400" color="white">
+          <Badge fontSize="md" rounded="full" px="4" bg="green.400" color="white">
             {hotel.rating}
           </Badge>
           <Spacer />
@@ -77,7 +77,7 @@ const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
           <Text fontSize="4xl" fontWeight={600} color="gray.700">
             {priceFormatted}
           </Text>
-          <Button w="100%" px="12" size="lg" fontSize="xl" colorScheme="blue">
+          <Button w="100%" px="12" size="lg" fontSize="xl" colorScheme="green">
             Comprar
           </Button>
         </VStack>
