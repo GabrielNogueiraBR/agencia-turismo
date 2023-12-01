@@ -7,7 +7,7 @@ import HotelPanel from './components/HotelPanel'
 const ClientElement = () => {
   return (
     <Flex w="90%" maxW="100%" rounded="xl" bg="white" shadow="sm" overflow="hidden">
-      <Tabs size="md" w="100%" variant="line">
+      <Tabs size="md" h="100%" w="100%" variant="line">
         <TabList
           w="100%"
           display="flex"

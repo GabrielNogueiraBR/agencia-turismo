@@ -8,7 +8,7 @@ const LayoutClientElement = ({ children }: { children: React.ReactNode }) => {
     <Flex
       flex="1"
       maxW="100vw"
-      maxH={{ base: '100%', sm: '100%', md: '100vh' }}
+      maxH="100%"
       overflowY={{ base: 'auto', md: 'hidden' }}
       direction={{ base: 'column', md: 'row' }}
     >
