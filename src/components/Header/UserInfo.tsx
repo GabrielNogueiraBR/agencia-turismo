@@ -8,10 +8,8 @@ import { useAuth } from '@/context/AuthContext'
 const UserInfo = () => {
   const { userInfo } = useAuth()
 
-  console.log({ userInfo })
-
   return (
-    <Flex direction="row" justify="center" align="center" gap="4">
+    <Flex position="absolute" right={0} direction="row" justify="center" align="center" gap="4">
       <VStack spacing={0} align="flex-end">
         <Text fontSize={'xl'}>{userInfo?.name}</Text>
         <Link as={NextLink} href="/pedidos" color="blueviolet">

@@ -6,10 +6,8 @@ import UserInfo from './UserInfo'
 
 const Header = () => {
   return (
-    <Flex w="100%" direction="row">
-      <Spacer />
+    <Flex position='relative' w="100%" direction="row" justify='center'>
       <Heading size="3xl">Agência de Turismo</Heading>
-      <Spacer />
       <UserInfo />
     </Flex>
   )
