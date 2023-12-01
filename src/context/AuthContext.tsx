@@ -9,6 +9,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 interface AuthContextData {
   token?: string
   userInfo?: UserPresenter
+  userHotel?: User
   isLoading: boolean
   isSigning: boolean
   signIn: (username: string, password: string) => Promise<void>
@@ -24,6 +25,7 @@ interface ProviderProps {
 export const AuthProvider = ({ children }: ProviderProps) => {
   const [token, setToken] = useState<string>()
   const [userInfo, setUserInfo] = useState<UserPresenter>()
+  const [userHotel, setUserHotel] = useState<User>()
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isSigning, setIsSigning] = useState<boolean>(false)
@@ -90,7 +92,16 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       // Update Header
       const config = { headers: { Authorization: `Bearer ${token}` } }
       const response = await flightApi.get<UserPresenter>('/users/me', config)
-      setUserInfo(response.data)
+      const userPresenter = response.data
+      setUserInfo(userPresenter)
+
+      const usersResponse = await hotelApi.get<{ records: User[] }>('/users')
+      const users = usersResponse.data.records
+
+      const userHotel = users.find(
+        (user) => user.email.toLowerCase() === userPresenter.email.toLowerCase(),
+      )
+      if (userHotel) setUserHotel(userHotel)
     } catch (e) {
       console.error(e)
     } finally {
