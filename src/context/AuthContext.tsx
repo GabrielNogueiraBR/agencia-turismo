@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     value: tokenAeroZen,
     isLoading: isLoadingToken,
     setLocalStorageValue,
+    removeLocalStorageValue,
   } = useStorageHook('token-aerozen', 'session')
 
   const pathname = usePathname()
@@ -103,11 +104,13 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       )
       if (userHotel) setUserHotel(userHotel)
     } catch (e) {
+      removeLocalStorageValue()
+      setToken(undefined)
       console.error(e)
     } finally {
       setIsLoading(false)
     }
-  }, [token])
+  }, [token, removeLocalStorageValue])
 
   useEffect(() => {
     if (token) loadUserInfo()
@@ -122,7 +125,9 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   }, [isLoadingToken])
 
   return (
-    <AuthContext.Provider value={{ token, isLoading, isSigning, signIn, userInfo, userHotel, signUp }}>
+    <AuthContext.Provider
+      value={{ token, isLoading, isSigning, signIn, userInfo, userHotel, signUp }}
+    >
       {children}
     </AuthContext.Provider>
   )
