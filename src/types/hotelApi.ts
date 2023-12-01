@@ -61,3 +61,26 @@ export type Room = {
   number: number
   price: number
 }
+
+export type BookingStatus = 'PENDING' | 'CONFIRMED' | 'CANCELED'
+
+export type BookingCreateDto = {
+  guests: number
+  checkInDate: string
+  checkoutDate: string
+  status: BookingStatus
+  user: string
+  hotel: string
+  room: string
+}
+
+export type BookingDto = {
+  id: string
+  guests: number
+  checkInDate: string
+  checkoutDate: string
+  status: BookingStatus
+  user: User
+  hotel: Hotel
+  room: Room
+}
