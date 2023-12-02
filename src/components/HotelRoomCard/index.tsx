@@ -39,13 +39,32 @@ const HotelRoomCard = ({ hotel, room, ...rest }: Props) => {
 
   const toast = useToast()
 
-  const reservationDays = 1
-
   const {
     register,
     handleSubmit,
+    watch,
     formState: { isSubmitting, errors },
   } = useForm<FormValues>()
+
+  const checkInTime = watch('checkIn')
+  const checkOutTime = watch('checkOut')
+
+  const reservationDays = useMemo(() => {
+    if (checkInTime && checkOutTime) {
+      const checkIn = new Date(checkInTime)
+      const checkOut = new Date(checkOutTime)
+
+      const diff = checkOut.getTime() - checkIn.getTime()
+
+      if (diff > 0) {
+        const daysDiff = diff / (1000 * 60 * 60 * 24)
+        const days = Math.round(daysDiff)
+        return Math.max(1, days)
+      }
+    }
+
+    return 1
+  }, [checkInTime, checkOutTime])
 
   const priceFormatted = useMemo(
     () =>
