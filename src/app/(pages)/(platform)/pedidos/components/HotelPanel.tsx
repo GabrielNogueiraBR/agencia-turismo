@@ -8,7 +8,6 @@ import hotelApi from '@/service/hotelApi'
 import { BookingDto } from '@/types/hotelApi'
 import { Button, Icon, TabPanel, TabPanelProps, Tooltip, useToast } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import { BiSolidXCircle } from 'react-icons/bi'
 import { GoTrash } from 'react-icons/go'
 
 interface Props extends TabPanelProps {}
