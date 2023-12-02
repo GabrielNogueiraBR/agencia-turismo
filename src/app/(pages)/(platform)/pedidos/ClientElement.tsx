@@ -32,9 +32,9 @@ const ClientElement = () => {
               },
             }}
           >
-            <Tab>Reserva de Hotel</Tab>
-            <Tab>Vôos</Tab>
-            <Tab>Eventos</Tab>
+            <Tab>Reservas de Hotel</Tab>
+            <Tab>Reservas de Vôos</Tab>
+            <Tab>Reservas de Eventos</Tab>
           </TabList>
           <TabPanels
             w="100%"
