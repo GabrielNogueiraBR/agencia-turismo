@@ -82,10 +82,19 @@ const FlightSeatCard = ({ flight, seat, onSubmit: _onSubmit, ...rest }: Props) =
   }
 
   return (
-    <Flex w="100%" shadow="md" border="1px solid" borderColor="gray.200" gap="4" {...rest}>
+    <Flex
+      w="100%"
+      roundedTopLeft="2rem"
+      roundedBottomLeft="2rem"
+      shadow="lg"
+      border="1px solid"
+      borderColor="gray.200"
+      gap="4"
+      {...rest}
+    >
       <Image
         w={{ base: '100%', sm: '8rem', md: '12rem', lg: '14rem' }}
-        src="https://via.placeholder.com/250"
+        src="/assets/flight.svg"
         fit="cover"
         loading="lazy"
         alt="Hotel image"
