@@ -20,6 +20,7 @@ const FlightSeats = ({ flight, ...rest }: Props) => {
     isPending,
     error,
     data: seats,
+    refetch,
   } = useQuery<SeatPresenter[]>({
     queryKey: ['seatsList'],
     queryFn: () => flightApi.get(`/flights/${flight.id}/seats/available`).then((res) => res.data),
@@ -27,7 +28,9 @@ const FlightSeats = ({ flight, ...rest }: Props) => {
 
   return (
     <VStack spacing="4">
-      {seats?.map((seat) => <FlightSeatCard key={seat.seatNumber} flight={flight} seat={seat} />)}
+      {seats?.map((seat) => (
+        <FlightSeatCard key={seat.seatNumber} flight={flight} seat={seat} onSubmit={refetch} />
+      ))}
     </VStack>
   )
 }

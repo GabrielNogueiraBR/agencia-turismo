@@ -79,3 +79,15 @@ export type SeatPresenter = {
   seatClass: string
   price: number
 }
+
+export type CreateReservationDto = {
+  seatNumber: string
+}
+
+export type ReservationPresenter = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  seatNumber: string
+  flight: FlightPresenter
+}
