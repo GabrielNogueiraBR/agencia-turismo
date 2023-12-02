@@ -71,6 +71,20 @@ const HotelPanel = ({ ...rest }: Props) => {
           defaultSortAsc={false}
           columns={[
             {
+              name: 'Hotel',
+              center: true,
+              selector: (row) => row.hotel.name,
+              sortable: true,
+              wrap: true,
+            },
+            {
+              name: 'Quarto',
+              center: true,
+              selector: (row) => row.room.number,
+              sortable: true,
+              wrap: true,
+            },
+            {
               id: 'checkIn',
               name: 'Check-in',
               selector: (row) => row.checkInDate,

@@ -26,7 +26,7 @@ const createUser = async () => {
 const createHotel = async () => {
   const payload: HotelCreateDto = {
     name: 'Hotel Le Palácio',
-    contactPhone: '19245673278',
+    contactPhone: '11999999999',
     rating: 'ECONOMICAL',
     address: {
       street: 'Rodovia Senador José Ermírio de Moraes',
