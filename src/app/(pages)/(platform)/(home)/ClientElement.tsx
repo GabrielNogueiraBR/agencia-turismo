@@ -43,6 +43,7 @@ const ClientElement = () => {
             border="2px solid"
             borderColor="gray.200"
             borderTop="0"
+            overflow="hidden"
           >
             <HotelPanel />
             <FlightPanel />
