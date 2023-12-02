@@ -25,11 +25,11 @@ const createUser = async () => {
 
 const createHotel = async () => {
   const payload: HotelCreateDto = {
-    name: 'Hotel name',
-    contactPhone: '11999999999',
+    name: 'Hotel Le Palácio',
+    contactPhone: '19245673278',
     rating: 'ECONOMICAL',
     address: {
-      street: 'Rodovia Senador José Ermírio de Moraes - Castelinho km 1,5',
+      street: 'Rodovia Senador José Ermírio de Moraes',
       number: 1425,
       district: 'Alto da Boa Vista',
       city: 'Sorocaba',
