@@ -38,13 +38,15 @@ individualmente as reservas de hotéis e voos.
 
    Isso criará os contêineres especificados no arquivo `docker-compose.yml`.
 
-5. Execute o seguinte comando para construir a infraestrutura básica para utilização:
+5. Certifique-se de que os contêineres subiram corretamente.
+
+6. Execute o seguinte comando para construir a infraestrutura básica para utilização:
 
    ```bash
    npm run setup
    ```
 
-6. Inicie o ambiente de desenvolvimento:
+7. Inicie o ambiente de desenvolvimento:
 
    ```bash
    npm run dev
@@ -52,13 +54,13 @@ individualmente as reservas de hotéis e voos.
 
    Isso iniciará o servidor Next.js em modo de desenvolvimento.
 
-7. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
+8. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
 
 ## Comandos Úteis
 
 - `npm run dev`: Inicia o servidor Next.js em modo de desenvolvimento.
 - `npm run build`: Compila o projeto para produção.
-- `npm start`: Inicia o servidor Next.js em modo de produção.
+- `npm run start`: Inicia o servidor Next.js em modo de produção.
 
 ## Contribuindo
 
