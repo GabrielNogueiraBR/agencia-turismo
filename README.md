@@ -1,6 +1,11 @@
 # Agência de Turismo
 
-Descrição curta do seu projeto.
+A proposta da aplicação é facilitar a aquisição de pacotes completos de
+turismo proporcionando ao usuário a comodidade de reservar hotéis, organizar
+voos e adquirir ingressos para eventos de entretenimento, como cinema, teatro
+e shows. Para viabilizar essa experiência, foi desenvolvido uma aplicação web
+que integra múltiplos serviços distintos (APIs), cada um dedicado a gerenciar
+individualmente as reservas de hotéis e voos.
 
 ## Pré-requisitos
 
@@ -41,7 +46,13 @@ Descrição curta do seu projeto.
 
    Isso criará os contêineres especificados no arquivo `docker-compose.yml`.
 
-6. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
+6. Execute o seguinte comando para construir a infraestrutura básica para utilização:
+
+   ```bash
+   `npm run setup`
+   ```
+
+7. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
 
 ## Comandos Úteis
 
