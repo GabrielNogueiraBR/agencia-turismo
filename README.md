@@ -28,17 +28,9 @@ individualmente as reservas de hotéis e voos.
    npm install
    ```
 
-3. Inicie o ambiente de desenvolvimento:
+3. Certifique-se de ter o Docker e o Docker Compose instalados.
 
-   ```bash
-   npm run dev
-   ```
-
-   Isso iniciará o servidor Next.js em modo de desenvolvimento.
-
-4. Certifique-se de ter o Docker e o Docker Compose instalados.
-
-5. Construa e inicie os contêineres Docker:
+4. Construa e inicie os contêineres Docker:
 
    ```bash
    docker-compose up -d
@@ -46,11 +38,19 @@ individualmente as reservas de hotéis e voos.
 
    Isso criará os contêineres especificados no arquivo `docker-compose.yml`.
 
-6. Execute o seguinte comando para construir a infraestrutura básica para utilização:
+5. Execute o seguinte comando para construir a infraestrutura básica para utilização:
 
    ```bash
-   `npm run setup`
+   npm run setup
    ```
+
+6. Inicie o ambiente de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+   Isso iniciará o servidor Next.js em modo de desenvolvimento.
 
 7. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
 
